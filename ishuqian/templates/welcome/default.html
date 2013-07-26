@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class='container clearfix'>
+  <div class='bookmark-list span8 fl'>
+
+  {% for b in bookmarks %}
+    <div class='item clearfix'>
+      <div class='vote fl'>
+        <span class='num'>{{ b.votes }}</span>
+        <span class='describe'>votes</span>
+      </div>
+      <div class='main fl ml15'>
+        <div class='feedtitle'><a href="{{ b.url }}">{{ b.title }}</a></div>
+        <div class='feeduser'><a href="#">{{ b.user.username }}</a></div>
+      </div>
+    </div>
+  {% endfor %}
+  
+  </div>
+
+</div>
+
+{% endblock %}

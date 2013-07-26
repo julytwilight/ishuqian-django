@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title>爱书签</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/layouts.css">
+  <script type="text/javascript" src='/static/js/jquery.js'></script>
+  <script type="text/javascript" src='/static/js/main.js'></script>
+  {% block static %}
+  {% endblock %}
+</head>
+<body>
+  {% include 'layouts/_header.html' %}
+
+  {% block content %}
+  {% endblock %}
+
+  {% include 'layouts/_footer.html' %}
+</body>
+</html>

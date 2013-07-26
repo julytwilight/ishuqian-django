@@ -1,0 +1,84 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class='container'>
+
+  <form class='new-bookmark-form' action="/new/" method="post" class='clearfix'>
+    {% csrf_token %}
+
+    <div class='span8 edit fl'>
+      <div class='blank clearfix'>
+        <label for="id-url">书签链接:</label>
+        {{ form.url }}
+        {{ form.url.errors }}
+      </div>
+
+      <div class='blank clearfix'>
+        <label for="id-title">标题:</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
+
+      <div class='blank clearfix'>
+        <label for="id-private">是否私有:</label>
+        <input id="id-private" name="private" class='private' type="checkbox" value="1">
+      </div>
+
+      <div class='blank clearfix'>
+        <input class='btn' type='submit' value='保存'>
+      </div>
+    </div>
+
+    <div class='span4 fr'>
+      请选择分类
+      <ul class='list-list'>
+        {% for list in lists %}
+          <li>
+            <input class="list-checkbox" {% if list.name == '默认分类' %}checked='checked'{% endif %} id='list-{{ list.id }}' type='radio' name='list' value='{{ list.id }}'>
+            <label for='list-{{ list.id }}'>{{ list.name }}</label>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class='new-list'>
+        <input class='new-list-name'>
+        <input type='button' class='p5 new-list-sub btn' style='font-size: 12px; line-height: 20px; padding: 5px;' value='新建分类'>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<script type="text/javascript">
+//新建分类
+var is = true;
+$('.new-list-sub').click(function(){
+    var name = $('.new-list-name').val();
+    if (!name) {alert('请输新分类名称')};
+
+    if (is) {
+      $.post('/list/new/', {'name': name}, function(data){
+        is = false;
+        if (data.error) {
+          alert(data.status)
+        } else {
+          $('.list-list').append('<li><input class="list-checkbox" id="list-' + data.value + '" type="radio" name="list" value="' + data.value + '"><label for="list-' + data.value + '">' + data.name + '<label/></li>');
+        };
+        is = true;
+      }, 'json');
+    }
+});
+
+$('.new-bookmark-form').submit(function(){
+  url = $('#id_url').val();
+  title = $('#id_title').val();
+  //l = $(".list-checkbox:checked").length;]
+  l = $(".list-checkbox:checked").val()
+  if (!l) {
+    alert('请选择分类');
+    return false;
+  }
+  if (!url && !title && !l)
+    return false;
+});
+</script>
+{% endblock %}
