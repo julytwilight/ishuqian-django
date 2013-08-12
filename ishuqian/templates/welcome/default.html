@@ -2,24 +2,102 @@
 
 {% block content %}
 
+{% load pagination_tags %}
+{% autopaginate items 25 %}
+
 <div class='container clearfix'>
   <div class='bookmark-list span8 fl'>
 
-  {% for b in bookmarks %}
+  {% for i in items %}
     <div class='item clearfix'>
       <div class='vote fl'>
-        <span class='num'>{{ b.votes }}</span>
-        <span class='describe'>votes</span>
+        <a href="{% url 'favorite_people' i.id %}">
+          <span class='num'>{{ i.favorites }}</span>
+          <span class='describe'>收藏</span>
+        </a>
       </div>
       <div class='main fl ml15'>
-        <div class='feedtitle'><a href="{{ b.url }}">{{ b.title }}</a></div>
-        <div class='feeduser'><a href="#">{{ b.user.username }}</a></div>
+        <div class='feedtitle oh' style="height:21px"><a target='_blank' href="{{ i.url }}">{{ i.title }}</a></div>
+        <div class='feeduser clearfix'>
+          <a href="{% url 'item_reply' i.id %}"><span class="ds-thread-count" data-thread-key="{{ i.id }}" data-count-type="comments"></span>评论</a>
+          <a href="{% url 'addurl' %}?url={{ i.url }}">收藏</a>
+          <!-- JiaThis Button BEGIN -->
+          <div class='fr' onmouseover="setShare('{{ i.title }} | #爱书签#', ''http://ishuqian.com/item/{{i.id}}/go/'');"> <!--自定义第一个分享标题和链接-->
+             <div class="jiathis_style">      
+             <a href="http://www.jiathis.com/share/?uid=1789726" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">分享</a>
+             </div>
+          </div>
+          <!-- JiaThis Button END -->
+        </div>
       </div>
     </div>
   {% endfor %}
-  
+    {% paginate %}
+  </div>
+
+  <div class='span4 fr'>
+    <div class='header_info'>
+      <ul>
+        <li>
+          <img src='/static/img/shu_heart.png' class=''>
+          <div class='info_right'>
+            <p>丰富的书签</p>
+            <p class='gray'>Millions of BookMark</p>
+          </div>
+        </li>
+        <li>
+          <img src='./static/img/shu_heart.png' class=''>
+          <div class='info_right'>
+            <p>发现喜爱的书签</p>
+            <p  class='gray'>Recommend & Discover</p>
+          </div>
+        </li>
+        <li>
+          <img src='/static/img/shu_heart.png' class=''>
+          <div class='info_right'>
+            <p>与朋友们分享好书签</p>
+            <p class='gray'>Share BookMark with friends</p>
+          </div>
+        </li>
+        <li>
+          <img src='/static/img/shu_heart.png' class=''>
+          <div class='info_right'>
+            <p>随时随地，爱书签</p>
+            <p class='gray'>Anytime,Anywhere,Anyway </p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
 </div>
 
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ishuqian"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+
+<!--单页面使用多分享按钮需要增加的分享参数代码-->                       
+<script type="text/javascript">
+function setShare(title, url) {
+  jiathis_config.title = title;
+  jiathis_config.url = url;
+}
+var jiathis_config = {
+  appkey: {
+    'tsina': 3120994132
+  }
+}
+</script>  
+<!--分享参数代码结束-->
+<!--分享功能代码统一放到页尾-->
+<script type="text/javascript" src="http://v1.jiathis.com/code/jia.js?uid=1789726" charset="utf-8"></script>
+<!--分享功能代码结束-->
 {% endblock %}
+

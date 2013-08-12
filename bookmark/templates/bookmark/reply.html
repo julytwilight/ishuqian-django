@@ -1,0 +1,11 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+{% load my_duoshuo %}
+
+<div class='container'>
+  <div class='title'>书签: <a target="_blank" href="{{ item.url }}">{% if item.title %}{{ item.title }}{% else %}{{ item.url }}{% endif %}</a></div>
+  {% duoshuo_comments item.id item.title item.user.id %}
+</div>
+
+{% endblock %}

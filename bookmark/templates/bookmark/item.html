@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>爱书签 | {{item.title}}</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+  <script type="text/javascript" src='/static/js/jquery.js'></script>
+  <style type="text/css">
+    .header {
+      padding: 10px;
+      background: #69975B;
+      height: 30px;
+      position: fixed;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+      margin-bottom: 0;
+    }
+    .title {
+      font-size: 20px;
+      line-height: 30px;
+    }
+    .header li {
+      float: left;
+      font-size: 14px;
+      line-height: 30px;
+      padding: 0 5px;
+    }
+    .name {
+      float: left;
+      font-size: 14px;
+      margin-left: 20px;
+      line-height: 30px;
+      overflow: hidden;
+      height: 30px;
+    }
+    a {
+      color: #fff;
+    }
+    .iframe-body {
+      width: 100%;
+      margin-top: 50px;
+      float:left;
+    }
+    .iframe {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class='header mb20'>
+    <div class='container nav clearfix'>
+      <h1 class='title fl'><a href="{% url 'default' %}">ISHUQIAN</a></h1>
+      <div class='name span9'><a href="{{ item.url }}">{{ item.title }}</a></div>
+
+      <ul class='fr'>
+        <li class='br1'><a class='add-bookmark' href="#">收藏</a></li>
+        <li class='br1'><a class='add-bookmark' href="#">喜欢</a></li>
+        <li class='br1'><a href="#">评论</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class='iframe-body' >
+    <iframe class='iframe fl' src="{{ item.url }}" marginwidth="0" marginheight="0" vspace="0" hspace="0" border="0" id='iframeid'></iframe>
+  </div>
+
+
+</body>
+</html>

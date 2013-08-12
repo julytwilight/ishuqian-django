@@ -3,13 +3,13 @@
 {% block content %}
 <div class='container'>
 
-  <form class='new-bookmark-form' action="/new/" method="post" class='clearfix'>
+  <form class='new-bookmark-form' action="/edit/{{ bookmark.id }}/" method="post" class='clearfix'>
     {% csrf_token %}
 
     <div class='span8 edit fl'>
       <div class='blank clearfix'>
         <label for="id-url">书签链接:</label>
-        <input class="input" maxlength="255" disabled='disabled' type="text" value="{{ item.url }}">
+        <input class="input" maxlength="255" disabled='disabled' type="text" value="{{ bookmark.url }}">
       </div>
 
       <div class='blank clearfix'>
@@ -20,12 +20,12 @@
 
       <div class='blank clearfix'>
         <label for="id-private">是否私有:</label>
-        <input id="id-private" name="private" class='private' type="checkbox" value="1">
+        <input id="id-private" {% if bookmark.private %}checked='checked'{% endif %} name="private" class='private' type="checkbox" value="1">
       </div>
 
       <div class='blank clearfix'>
-        <input name="item" type="hidden" value="{{ item.id }}">
-        <input name="url" type="hidden" value="{{ item.url }}">
+        <input name="item" type="hidden" value="{{ bookmark.item.id }}">
+        <input name="url" type="hidden" value="{{ bookmark.url }}">
       </div>
 
       <div class='blank clearfix'>
@@ -38,7 +38,7 @@
       <ul class='list-list'>
         {% for list in lists %}
           <li>
-            <input class="list-checkbox" {% if list.name == '默认分类' %}checked='checked'{% endif %} id='list-{{ list.id }}' type='radio' name='list' value='{{ list.id }}'>
+            <input class="list-checkbox" {% if list.id == bookmark.list_id %}checked='checked'{% endif %} id='list-{{ list.id }}' type='radio' name='list' value='{{ list.id }}'>
             <label for='list-{{ list.id }}'>{{ list.name }}</label>
           </li>
         {% endfor %}
@@ -66,9 +66,8 @@ $('.new-list-sub').click(function(){
           alert(data.status)
         } else {
           $('.list-list').append('<li><input class="list-checkbox" id="list-' + data.value + '" type="radio" name="list" value="' + data.value + '"><label for="list-' + data.value + '">' + data.name + '<label/></li>');
-          $('#list-'+data.value).click();
+          $('.new-list-name').val('');
         };
-        $('.new-list-name').val('');
         is = true;
       }, 'json');
     }

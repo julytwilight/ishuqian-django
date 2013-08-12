@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class='container clearfix'>
+  <div class='span7 list-wrapper fl'>
+    <h3 class='list-title clearfix'>导入书签</h3>
+    <div class='span5 ptb20 center'>
+      <form action='/bookmarks/import/' method='post' enctype="multipart/form-data">{% csrf_token %}
+        <div><label for='file' class='f16'>请选择书签文件:&nbsp;</label><input id='file' name='file' type='file'></div>
+        <div class='mt15'><input class='btn import-bookmarks-submit' style='font-size:12px;width:60px;height:30px;padding:5px;' type='submit' value='提交'></div>
+      </form>
+    </div>
+  </div>
+
+  <div class='ml40 span4 list-wrapper fl'>
+    <h3 class='list-title clearfix'>小贴士</h3>
+    <div class='p10'>书签自动导入到默认分类，回到页面您可以批量管理移动到其他分类。</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$('.import-bookmarks-submit').click(function(){
+  if(!$('#file').val()){alert('请选择书签');return false;};
+});
+</script>
+
+{% endblock %}

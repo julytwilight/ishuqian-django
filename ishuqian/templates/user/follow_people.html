@@ -1,0 +1,119 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class='container clearfix'>
+  <div class='span3 fl'>
+    <div class='bookmarks-feed list-wrapper p10'>
+      <img width='200' height='200' src="{{ user.avatar }}">
+      <div class='mt15 username'>{{ user.username }}</div>
+      <div class='mt10 clearfix w121'>
+        <span class='follow-num fl pr10'>
+          {% if current == 'following' %}
+            {{ user.following }}
+          {% else %}
+            <a href="{% url 'user_following' user.id %}">{{ user.following }}</a>
+          {% endif %}
+          <br>关注
+        </span>
+        <span class='follow-num fl pl10'>
+          {% if current == 'followers' %}
+            {{ user.followers }}
+          {% else %}
+            <a class='followers' href="{% url 'user_followers' user.id %}">{{ user.followers }}</a>
+          {% endif %}
+          <br>粉丝
+        </span>
+      </div>
+      {% if follow == 'yes' %}
+        <div><a class='mt10 following follow' href="javascript:">正在关注</a></div>
+      {% elif follow == 'no' %}
+        <div><a class='mt10 unfollow follow' href="javascript:">关注</a></div>
+      {% endif %}
+    </div>
+
+    <div class='bookmark-list list-wrapper mt20'>
+      <h3 class='list-title clearfix'>
+        <div class='fl'>收藏夹</div>
+      </h3>
+      <ul class='home-list ajax-lists'>
+        <li class='bt0'>
+          {% if list_id == 0 %}
+            所有书签&nbsp;<span class='count'><b>({{ user.bookmarks_count }})</b></span>
+          {% else %}
+            <a href="{% url 'user_index' user.id %}">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
+          {% endif %}
+        </li>
+      {% for l in user.list_set.all %}
+        <li>
+          {% if list_id == l.id %}
+            {{ l.name }}&nbsp;<span class='count'><b>({{ l.bookmarks }})</b></span>
+          {% else %}
+            <a href="{% url 'user_index_cate' user.id l.id  %}">{{ l.name }}</a>&nbsp;<span class='count'>({{ l.bookmarks }})</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+
+  <div class='bookmark-list span9 fr'>
+    <ul class='favorite-people clearfix'>
+    {% for p in people %}
+      {% if current == 'following' %}
+        <a href="{% url 'user_index' p.hero.id %}">
+          <li {% if forloop.counter == 1 %}class='ml0'{%else%}class='ml20'{% endif %}>
+            <div class='favorite-person clearfix'>
+              <img class='fl' width='30' height='30' src="{{ p.hero.avatar_thumbnail }}">
+              <span>{{ p.hero.username }}</span>
+            </div>
+          </li>
+        </a>
+      {% elif current == 'followers' %}
+        <a href="{% url 'user_index' p.fans.id %}">
+          <li {% if forloop.counter == 1 %}class='ml0'{%else%}class='ml20'{% endif %}>
+            <div class='favorite-person clearfix'>
+              <img class='fl' width='30' height='30' src="{{ p.fans.avatar_thumbnail }}">
+              <span>{{ p.fans.username }}</span>
+            </div>
+          </li>
+        </a>
+      {% endif %}
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var id = '{{ user.id }}';
+  var is = true;
+  
+  // 关注
+  $('.follow').click(function(){
+    if (is) {
+      $.post('/user/follow/', {id: id}, function(data){
+        is = false;
+        if (data.error) {
+          alert(data.message);
+        } else {
+          if (data.message == 'followed') {
+            $('.follow').removeClass('unfollow');
+            $('.follow').addClass('following');
+            $('.follow').html('正在关注');
+            $('.followers').html(data.followers);
+          } else if(data.message == 'unfollowed') {
+            $('.follow').removeClass('following');
+            $('.follow').addClass('unfollow');
+            $('.follow').html('关注');
+            $('.followers').html(data.followers);
+          }
+        }
+        is = true;
+      }, 'json');
+    };
+  });
+
+</script>
+
+{% endblock %}

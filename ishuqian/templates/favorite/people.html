@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class='container clearfix'>
+  <div class='bookmark-list span12 fl'>
+    <div class='title'>书签: <a target="_blank" href="{{ item.url }}">{% if item.title %}{{ item.title }}{% else %}{{ item.url }}{% endif %}</a></div>
+    <ul class='favorite-people clearfix'>
+    {% for p in people %}
+    <a href="{% url 'user_index' p.user.id %}">
+      <li {%if forloop.counter == 1 %}class='ml0'{%else%}class='ml20'{% endif %}>
+        <div class='favorite-person clearfix'>
+          <img class='fl' width='30' height='30' src="{{ p.user.avatar_thumbnail }}">
+          <span>{{ p.user.username }}</span>
+        </div>
+      </li>
+    </a>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

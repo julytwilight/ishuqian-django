@@ -90,6 +90,15 @@ sub {
 }
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: tool */
+.oh {
+  overflow: hidden;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
 /* 清理浮动 */
 .clear {
   clear: both;
@@ -129,20 +138,71 @@ body .fn-hide {
   float: right;
 }
 /* margin setting */
+.center {
+  margin: 0 auto;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt15 {
+  margin-top: 15px;
+}
 .mt20 {
   margin-top: 20px;
+}
+.mr10 {
+  margin-right: 10px;
 }
 .mr20 {
   margin-right: 20px;
 }
+.mb10 {
+  margin-bottom: 10px;
+}
+.mb15 {
+  margin-bottom: 15px;
+}
 .mb20 {
   margin-bottom: 20px;
+}
+.ml0 {
+  margin-left: 0px;
+}
+.ml10 {
+  margin-left: 10px;
 }
 .ml15 {
   margin-left: 15px;
 }
+.ml20 {
+  margin-left: 20px;
+}
+.ml40 {
+  margin-left: 40px;
+}
+/* padding setting */
 .p5 {
   padding: 5px;
+}
+.p10 {
+  padding: 10px;
+}
+.p15 {
+  padding: 15px;
+}
+.pl10 {
+  padding-left: 10px;
+}
+.pr10 {
+  padding-right: 10px;
+}
+.ptb20 {
+  padding: 20px 0;
+}
+
+/* font setting */
+.f16 {
+  font-size: 16px
 }
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: common */
@@ -211,4 +271,37 @@ a:hover {
 ins, a {
   text-decoration: none;
 }
-/* border setting */
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: paginate */
+.pagination {
+  height: 40px;
+  margin: 20px 0;
+}
+
+.pagination a,
+.pagination span {
+  float: left;
+  padding: 0 14px;
+  line-height: 38px;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-left-width: 0;
+  color: #000;
+  font-size: 12px;
+}
+
+.pagination .prev {
+  border-left-width: 1px;
+}
+
+.pagination a:hover,
+.pagination .current {
+  background-color: #f5f5f5;
+}
+
+.pagination .current {
+  color: #999999;
+  cursor: default;
+  background-color: transparent;
+}
+

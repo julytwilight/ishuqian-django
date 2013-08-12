@@ -25,3 +25,14 @@ class User(models.Model):
 
     def __unicode__(self):
         return self.username
+
+    def update_bookmarks(self):
+        self.bookmarks_count = self.bookmark_set.count()
+        self.save()
+
+
+class Follow(models.Model):
+
+    fans       = models.ForeignKey(User, related_name='fans')
+    hero       = models.ForeignKey(User, related_name='hero')
+    created_at = models.DateTimeField(auto_now_add=True)

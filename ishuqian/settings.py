@@ -79,6 +79,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.auth.context_processors.auth',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -95,6 +96,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -103,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'pagination.middleware.PaginationMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -126,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
@@ -137,6 +140,8 @@ INSTALLED_APPS = (
     # lib
     'weibo',
     'south',
+    'pagination',
+    'duoshuo',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -167,3 +172,7 @@ LOGGING = {
         },
     }
 }
+
+# Duoshuo
+DUOSHUO_SECRET = '13791b992deed1b32d3aa5864381d208'
+DUOSHUO_SHORT_NAME = 'ishuqian'

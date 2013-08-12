@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class='container'>
+  <ul>
+  {% for l in lists %}
+
+    <li>
+      <form action='{% url "list_update" l.id %}' method='post'>
+        {% csrf_token %}
+        <div class='edit-lists'>
+          <input class='input' name='name' value='{{ l.name }}'>
+          <input class='update' type='submit' value='更新'>
+          <a href="{% url 'list_delete' l.id %}" title='删除分类，书签归入默认分类' class='del'>删除分类</a>
+          <a href="{% url 'list_delete_all' l.id %}" title='删除分类及分类里所有的书签' class='delall ml15'>删除所有</a>
+        </div>
+      </form>
+    </li>
+
+  {% endfor %}
+  </ul>
+</div>
+
+<script type="text/javascript">
+$('.update').click(function() {
+  if (!$(this).prev().val()) {
+    alert('请输入分类名称');
+    return false;
+  }
+});
+
+$('.del').click(function() {
+  if (!confirm("删除分类，分类中的书签归入默认分类"))
+    return false;
+});
+
+$('.delall').click(function() {
+  if (!confirm("删除分类及分类里所有的书签"))
+    return false;
+});
+</script>
+
+{% endblock %}

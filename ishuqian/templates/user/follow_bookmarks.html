@@ -11,7 +11,7 @@
       <h3 class='list-title clearfix'>书签流</h3>
       <ul class='home-list'>
         <li class='bt0'>
-          <a href="{% url 'user_follow_feed' %}">朋友的书签</a>
+          朋友的书签
         </li>
 <!--         <li>
           <a href="/home/">顶过的书签</a>
@@ -49,19 +49,11 @@
       </div>
       <ul class='home-list ajax-lists'>
         <li class='bt0'>
-          {% if list_id == 0 %}
-            所有书签&nbsp;<span class='count'><b>({{ user.bookmarks_count }})</b></span>
-          {% else %}
-            <a href="/home/">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
-          {% endif %}
+          <a href="/home/">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
         </li>
       {% for l in user.list_set.all %}
         <li>
-          {% if list_id == l.id %}
-            {{ l.name }}&nbsp;<span class='count'><b>({{ l.bookmarks }})</b></span>
-          {% else %}
-            <a href="{% url 'home_list' l.id %}">{{ l.name }}</a>&nbsp;<span class='count'>({{ l.bookmarks }})</span>
-          {% endif %}
+          <a href="{% url 'home_list' l.id %}">{{ l.name }}</a>&nbsp;<span class='count'>({{ l.bookmarks }})</span>
         </li>
       {% endfor %}
       </ul>
@@ -69,47 +61,31 @@
 
   </div>
 
-  <form method='post' class='check-bookmarks'>
-    {% csrf_token %}
-    <div class='bookmark-list span9 fr'>
-      <div class='toolbar'>
-        <span><a href="javascript:" class='checkall'>全选</a></span>
-        <span class='ml15'><a href="javascript:" class='delcheck'>全不选</a></span>
-        <select name='id' class='ml15 select-list' id='select-list'>
-          <option value=0>移动到</option>
-          {% for l in user.list_set.all %}
-            <option value={{ l.id }}>{{ l.name }}</option>
-          {% endfor %}
-        </select>
-        <input class='ml15 bookmarks_delete' type='button' value='删除'>
-      </div>
-    {% for b in bookmarks %}
-      <div class='mt15 home-item clearfix'>
-        <div class='fl mt15 mr10'>
-          <input type='checkbox' class='bm-box' name='bm_box' value={{ b.id }}>
-        </div>
-        <div class='main fl'>
-          <div class='feedtitle span8 oh' style='height:40px;'><a target='_blank' href="{{ b.url }}">{{ b.title }}</a></div>
-          <div class='feeduser' style='margin-top:0px;'>
-            <span><a href="{% url 'bookmark_edit' b.id %}">编辑</a></span>
-            <span><a href="{% url 'bookmark_delete' b.id %}">删除</a></span>
-            <span><a href="{% url 'bookmark_reply' b.id %}">评论</a></span>
-            <span class='addtime'>{{ b.addtime | date:"M d, Y" }}</span>
-            {% if list_id == 0 %}<span>所属分类: {{ b.list.name }}</span>{% endif %}
-            <!-- JiaThis Button BEGIN -->
-            <div class='fr' onmouseover="setShare('{{ b.title }} | #爱书签#', 'http://ishuqian.com/bookmark/{{b.id}}/go/');"> <!--自定义第一个分享标题和链接-->
-               <div class="jiathis_style">
-               <a href="http://www.jiathis.com/share/?uid=1789726" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">分享</a>
-               </div>
-            </div>
-            <!-- JiaThis Button END -->
+ 
+  <div class='bookmark-list span9 fr'>
+  {% for b in bookmarks %}
+    <div class='home-item clearfix'>
+      <div class='main fl'>
+        <div class='feedtitle span8 oh' style='height:40px;'><a target='_blank' href="{{ b.url }}">{{ b.title }}</a></div>
+        <div class='feeduser mb10'>
+          <span><a href="{% url 'addurl' %}?url={{ b.url }}">收藏</a></span>
+          <span><a href="{% url 'bookmark_reply' b.id %}">评论</a></span>
+          <span class='ml15'><a href="{% url 'user_index' b.user.id %}">{{ b.user.username }}</a></span>
+          <span class='addtime'>{{ b.addtime | date:"M d, Y" }}</span>
+          <!-- JiaThis Button BEGIN -->
+          <div class='fr' onmouseover="setShare('{{ b.title }} | #爱书签#', ''http://ishuqian.com/bookmark/{{b.id}}/go/'');"> <!--自定义第一个分享标题和链接-->
+             <div class="jiathis_style">      
+             <a href="http://www.jiathis.com/share/?uid=1789726" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">分享</a>
+             </div>
           </div>
+          <!-- JiaThis Button END -->
         </div>
       </div>
-    {% endfor %}
-    {% paginate %}
     </div>
-  </form>
+  {% endfor %}
+  {% paginate %}
+  </div>
+
 </div>
 
 <script type="text/javascript">
@@ -149,27 +125,7 @@ $('.new-list-sub').click(function(){
     }, 'json');
   }
 });
-
-$('#select-list').change(function(){
-  if ($('#select-list').val() == 0) {return false;};
-  if ($('input[name=bm_box]:checked').length <= 0) {
-    alert('请选择移动的书签');
-    $('.select-list').val(0);
-    return false;
-  };
-  $('.check-bookmarks').attr('action', '/bookmarks/change/');
-  $('.check-bookmarks').submit();
-});
-
-
-$('.bookmarks_delete').click(function(){
-  if ($('input[name=bm_box]:checked').length <= 0) {alert('请选择要删除的书签'); return false;};
-  $('.check-bookmarks').attr('action', '/bookmarks/delete/');
-  $('.check-bookmarks').submit();
-});
-
 </script>
-
 <!--单页面使用多分享按钮需要增加的分享参数代码-->                       
 <script type="text/javascript">
 function setShare(title, url) {
@@ -181,7 +137,7 @@ var jiathis_config = {
     'tsina': 3120994132
   }
 }
-</script>
+</script>  
 <!--分享参数代码结束-->
 <!--分享功能代码统一放到页尾-->
 <script type="text/javascript" src="http://v1.jiathis.com/code/jia.js?uid=1789726" charset="utf-8"></script>

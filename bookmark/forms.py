@@ -8,8 +8,7 @@ class BookmarkForm(forms.ModelForm):
 
     class Meta():
         model = Bookmark
-        fields = ('url', 'title')
+        fields = ('title',)
         widgets = {
-            'url': forms.TextInput(attrs={'class':'input'}),
             'title': forms.TextInput(attrs={'class':'input'}),
         }

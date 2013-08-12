@@ -3,16 +3,15 @@
   <div class='container nav clearfix'>
     <h1 class='title fl'><a href="{% url 'default' %}">ISHUQIAN</a></h1>
     <ul class='fl'>
-      <li><a href="#">发现</a></li>
-      <li><a href="#">分类</a></li>
-      <li class='br1'><a href="#">排行</a></li>
+      <li class='br1'><a href="{% url 'default' %}">发现</a></li>
+<!--       <li><a href="#">分类</a></li>
+      <li><a href="#">排行</a></li> -->
     </ul>
 
     <ul class='fr'>
       {% if request.session.id %}
         <li><a href="{% url 'home' %}"><img src="{{ request.session.avatar }}">{{ request.session.username }}</a></li>
         <li class='br1'><a class='add-bookmark' href="#">添加书签</a></li>
-        <li class='br1'><a href="#">设置</a></li>
         <li class='br1'><a href="/logout/">登出</a></li>
       {% else %}
         <li class='br1'><a href="{% auth_url sina %}">微博登陆</a></li>
@@ -22,7 +21,7 @@
 </div>
 
 <div class='addlink container addlink'>
-  <form class='add-url' action='/addurl/' method='post'>
+  <form class='add-url' action='/addurl/' method='get'>
     {% csrf_token %}
     <label>链接地址</label>
     <input class='txt-field bookmark-url' name='url'>

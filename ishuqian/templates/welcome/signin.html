@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+{% load sns_extras %}
+<div class='container span5 signin'>
+  <h3>登陆爱书签</h3>
+  <div class='sina_login'>
+    <a href="{% auth_url sina %}"><span><strong>登录微博</strong></span></a>
+  </div>
+</div>
+
+{% endblock %}
