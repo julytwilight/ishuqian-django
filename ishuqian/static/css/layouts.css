@@ -415,3 +415,22 @@
 .jiathis_style a {
   font-size: 12px;
 }
+
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: header */
+.footer {
+  padding: 20px;
+}
+.footer .w960 {
+  /*border-top: 1px solid #9f824a;*/
+  height: 20px;
+}
+.footer ul {
+  margin-top: 10px;
+}
+.footer .icp {
+  margin: 10px 0 0 0;
+  font-size: 12px;
+}
+.footer a {
+  color: #000;
+}
