@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'south',
     'pagination',
     'duoshuo',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging
