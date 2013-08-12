@@ -3,5 +3,5 @@
 *.pyc
 local_settings.py
 .idea
-welcome/media
-welcome/settings.py
+ishuqian/media
+ishuqian/settings.py
