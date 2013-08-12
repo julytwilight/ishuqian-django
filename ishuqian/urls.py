@@ -58,6 +58,6 @@ urlpatterns = patterns('',
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
 + staticfiles_urlpatterns()
 
-if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += staticfiles_urlpatterns()
+# if settings.DEBUG is False:   #if DEBUG is True it will be served automatically
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#     urlpatterns += staticfiles_urlpatterns()
