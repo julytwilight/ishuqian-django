@@ -22,7 +22,7 @@
           <a href="{% url 'item_reply' i.id %}"><span class="ds-thread-count" data-thread-key="{{ i.id }}" data-count-type="comments"></span>评论</a>
           <a href="{% url 'addurl' %}?url={{ i.url }}">收藏</a>
           <!-- JiaThis Button BEGIN -->
-          <div class='fr' onmouseover="setShare('{{ i.title }} | #爱书签#', ''http://ishuqian.com/item/{{i.id}}/go/'');"> <!--自定义第一个分享标题和链接-->
+          <div class='fr' onmouseover="setShare('{{ i.title }} | #爱书签#', 'http://ishuqian.com/item/{{i.id}}/go/');"> <!--自定义第一个分享标题和链接-->
              <div class="jiathis_style">      
              <a href="http://www.jiathis.com/share/?uid=1789726" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">分享</a>
              </div>
