@@ -3,7 +3,7 @@ from weibo import APIClient
 
 APP_KEY      = '3120994132'                            # app key
 APP_SECRET   = '6507333a8c1c432eab40723e9bef204c'      # app secret
-CALLBACK_URL = 'http://127.0.0.1:8000/callback/weibo'     # callback url
+CALLBACK_URL = 'http://ishuqian.com/callback/weibo'     # callback url
 
 client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
 
