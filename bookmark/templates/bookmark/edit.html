@@ -3,7 +3,7 @@
 {% block content %}
 <div class='container'>
 
-  <form class='new-bookmark-form' action="/edit/{{ bookmark.id }}/" method="post" class='clearfix'>
+  <form class='new-bookmark-form clearfix' action="/edit/{{ bookmark.id }}/" method="post">
     {% csrf_token %}
 
     <div class='span8 edit fl'>
