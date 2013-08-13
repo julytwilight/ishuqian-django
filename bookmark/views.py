@@ -296,7 +296,11 @@ def bookmarks_import(request):
             text += t
 
         soup = BeautifulSoup(text)
-        links = soup.dl.find_all('a')
+        try:
+            links = soup.dl.find_all('a')
+        except Exception, e:
+            return HttpResponse('请导入正确的书签文件')
+            
         for l in links:
             url = l.get('href').encode('utf-8')
             title = l.string.encode('utf-8')

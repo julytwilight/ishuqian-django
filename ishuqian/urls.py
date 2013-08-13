@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     url(r'^signin/$', 'ishuqian.views.signin', name='signin'),
     url(r'^logout/$','ishuqian.views.logout', name='logout'),
     url(r'^home/$', 'ishuqian.views.home', name='home'),
+    url(r'^home/public/$', 'ishuqian.views.home_public', name='home_public'),
+    url(r'^home/private/$', 'ishuqian.views.home_private', name='home_private'),
     url(r'^home/list/(?P<id>\d+)/$', 'ishuqian.views.home', name='home_list'),
 
     # bookmark

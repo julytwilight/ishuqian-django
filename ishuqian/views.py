@@ -86,6 +86,20 @@ def home(request, id=0):
 # return render(request, 'debug.html', {'debug': bookmarks})
 
 
+@login_required
+def home_public(request):
+    user = User.objects.get(id=request.session.get('id', None))
+    bookmarks = user.bookmark_set.filter(private=0).order_by('-updatetime')
+    return render(request, 'welcome/home.html', {'user': user, 'bookmarks': bookmarks, 'list_id': 'public'})
+
+
+@login_required
+def home_private(request):
+    user = User.objects.get(id=request.session.get('id', None))
+    bookmarks = user.bookmark_set.filter(private=1).order_by('-updatetime')
+    return render(request, 'welcome/home.html', {'user': user, 'bookmarks': bookmarks, 'list_id': 'private'})
+
+
 # user
 def user(request, id, cate=None):
     user = get_object_or_404(User, id=id)

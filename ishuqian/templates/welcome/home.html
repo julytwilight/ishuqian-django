@@ -55,6 +55,23 @@
             <a href="/home/">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
           {% endif %}
         </li>
+
+        <li>
+          {% if list_id == 'public' %}
+            公开书签
+          {% else %}
+            <a href="{% url 'home_public' %}">公开书签</a>
+          {% endif %}
+        </li>
+
+        <li>
+          {% if list_id == 'private' %}
+            私有书签&nbsp;<span class='count'></span>
+          {% else %}
+            <a href="{% url 'home_private' %}">私有书签</a>
+          {% endif %}
+        </li>
+
       {% for l in user.list_set.all %}
         <li>
           {% if list_id == l.id %}
