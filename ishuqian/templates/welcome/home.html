@@ -49,14 +49,6 @@
       </div>
       <ul class='home-list ajax-lists'>
         <li class='bt0'>
-          {% if list_id == 0 %}
-            所有书签&nbsp;<span class='count'><b>({{ user.bookmarks_count }})</b></span>
-          {% else %}
-            <a href="/home/">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
-          {% endif %}
-        </li>
-
-        <li>
           {% if list_id == 'public' %}
             公开书签
           {% else %}
@@ -69,6 +61,14 @@
             私有书签&nbsp;<span class='count'></span>
           {% else %}
             <a href="{% url 'home_private' %}">私有书签</a>
+          {% endif %}
+        </li>
+
+        <li>
+          {% if list_id == 0 %}
+            所有书签&nbsp;<span class='count'><b>({{ user.bookmarks_count }})</b></span>
+          {% else %}
+            <a href="/home/">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
           {% endif %}
         </li>
 

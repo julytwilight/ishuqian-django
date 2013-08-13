@@ -49,8 +49,17 @@
       </div>
       <ul class='home-list ajax-lists'>
         <li class='bt0'>
+          <a href="{% url 'home_public' %}">公开书签</a>
+        </li>
+
+        <li>
+          <a href="{% url 'home_private' %}">私有书签</a>
+        </li>
+
+        <li class='bt0'>
           <a href="/home/">所有书签</a>&nbsp;<span class='count'>({{ user.bookmarks_count }})</span>
         </li>
+        
       {% for l in user.list_set.all %}
         <li>
           <a href="{% url 'home_list' l.id %}">{{ l.name }}</a>&nbsp;<span class='count'>({{ l.bookmarks }})</span>

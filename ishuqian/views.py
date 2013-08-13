@@ -131,7 +131,7 @@ def follow_bookmarks(request):
     user = get_object_or_404(User, id=request.session.get('id', None))
     follows = user.fans.all()
     bookmarks = Bookmark.objects.filter(user__in=[i.hero for i in follows]).exclude(private=1).order_by('-addtime')
-    return render(request, 'user/follow_bookmarks.html', {'user': user, 'bookmarks': bookmarks})
+    return render(request, 'user/follow_bookmarks.html', {'user': user, 'bookmarks': bookmarks, 'count': bookmarks.count()})
 
 
 # 关注和取消关注
