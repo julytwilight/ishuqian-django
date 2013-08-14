@@ -303,7 +303,10 @@ def bookmarks_import(request):
             
         for l in links:
             url = l.get('href').encode('utf-8')
-            title = l.string.encode('utf-8')
+            try:
+                title = l.string.encode('utf-8')
+            except Exception:
+                title = url
             # bookmark是否存在
             try:
                 bookmark = Bookmark.objects.get(url=url, user_id=request.session.get('id', None))
