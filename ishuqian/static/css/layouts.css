@@ -434,3 +434,16 @@
 .footer a {
   color: #000;
 }
+
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: about */
+.about {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.about ul {
+  list-style: circle;
+}
+.about li {
+  margin: 10px 0;
+}
+

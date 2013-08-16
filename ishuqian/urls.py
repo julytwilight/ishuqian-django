@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # ishuqian:
     url(r'^$', 'ishuqian.views.default', name='default'),
+    url(r'^about/$', 'ishuqian.views.feedback', name='about'),
     url(r'^callback/(?P<social>\w+)/$','ishuqian.views.callback', name='callback'),
     url(r'^signin/$', 'ishuqian.views.signin', name='signin'),
     url(r'^logout/$','ishuqian.views.logout', name='logout'),

@@ -173,3 +173,7 @@ def followers(request, id):
     user = get_object_or_404(User, id=id)
     people =  user.hero.all()
     return render(request, 'user/follow_people.html', {'people': people, 'current': 'followers', 'user':user })
+
+
+def feedback(request):
+    return render(request, 'welcome/feedback.html')

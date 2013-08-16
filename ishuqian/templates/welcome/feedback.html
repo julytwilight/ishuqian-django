@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+{% load my_duoshuo %}
+
+<div class='container'>
+  <div class='about'>
+    <ul>
+      <li>爱书签是一个发现、收集、分享以及内容挖掘为主的云书签服务。</li>
+      <li>无论您身在何处，都不会错过精彩。</li>
+      <li>独有的社交功能您可以看到互联网大牛或者女神们平时关注什么样的书签并互动。英雄所见略同，或许你们就在收藏同样的书签喔</li>
+      <li>我们坚信大家好才是真的好，我们会统计收藏最多和近期最热门的书签并推荐给用户，发掘阅读真正的价值。</li>
+      <li>我们的目标是Anytime,Anywhere,Anyway。稍后我们会推出移动端和浏览器的插件让大家随时随地的享受阅读的精彩。</li>
+      <li>当然，网站刚刚上线，还有很多的不足，希望各位可以提出更好的建议，更多的想法，更多的需求，我们会第一时间了解并反馈。您可以在下面留言或者发送邮件<a href="mailto:talk@baiwale.com">联系我们</a></li>
+    </ul>
+  </div>
+  {% duoshuo_comments '007' '意见反馈' 0 %}
+</div>
+
+{% endblock %}
