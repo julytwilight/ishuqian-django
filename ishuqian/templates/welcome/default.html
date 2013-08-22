@@ -19,7 +19,7 @@
       <div class='main fl ml15'>
         <div class='feedtitle oh' style="height:21px"><a target='_blank' href="{{ i.url }}">{{ i.title }}</a></div>
         <div class='feeduser clearfix'>
-          <a href="{% url 'item_reply' i.id %}"><span class="ds-thread-count" data-thread-key="{{ i.id }}" data-count-type="comments"></span>评论</a>
+          <a href="{% url 'item_reply' i.id %}"><span class="ds-thread-count" data-thread-key="{{ i.url }}" data-count-type="comments"></span>评论</a>
           <a href="{% url 'addurl' %}?url={{ i.url }}">收藏</a>
           <!-- JiaThis Button BEGIN -->
           <div class='fr' onmouseover="setShare('{{ i.title }} | #爱书签#', 'http://ishuqian.com/item/{{i.id}}/go/');"> <!--自定义第一个分享标题和链接-->
